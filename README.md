@@ -31,3 +31,7 @@ docker run -v /path/to/bubblewrap:/root/bubblewrap bubblewrap <executable>
 
 - Put the output in a sub-directory
 - Wrap docker commands with `make`
+- Prevent clobbering and conflicts with existing output
+  - e.g. `upx` is unhappy if `dropper-packed` already exists
+- Provide more configuration options
+  - Support for 32-bit binaries
