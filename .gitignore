@@ -1,4 +1,5 @@
 *
-!Dockerfile
-!bubblewrap.sh
 !.gitignore
+!bubblewrap.sh
+!dropper_base.cpp
+!Dockerfile
