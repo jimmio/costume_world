@@ -8,6 +8,10 @@ RUN apt update && \
     cd donut && \
     make
 
-WORKDIR /root
+RUN mkdir /root/bubblewrap
 
-ENTRYPOINT ["/bin/bash"]
+WORKDIR /root/bubblewrap
+
+COPY ./ ./
+
+ENTRYPOINT ["/bin/bash", "./bubblewrap.sh"]
