@@ -11,27 +11,27 @@ With a given executable:
 
 As of 2021-11, `bubblewrap` provides safe shipping for off-the-shelf `mimikatz` past an up-to-date Windows Defender.
 
+## Requirements
+
+- docker
+- make
+
 ## Setup
 
-1. Build the image:
-
-   ```
-   docker build -t bubblewrap .
-   ```
-
-1. Copy the input executable to the bubblewrap directory.
+```
+make build
+```
 
 ## Usage
 
 ```
-docker run -v /path/to/bubblewrap:/root/bubblewrap bubblewrap <executable>
+make bubblewrap <executable_name>
 ```
 
 ## TODO
 
 - Put the output in a sub-directory
-- Wrap docker commands with `make`
 - Prevent clobbering and conflicts with existing output
-  - e.g. `upx` is unhappy if `dropper-packed.exe` already exists
+  - e.g. `upx` is unhappy if `dropper_packed.exe` already exists
 - Provide more configuration options
   - Support for 32-bit binaries
