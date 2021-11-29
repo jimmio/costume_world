@@ -1,6 +1,6 @@
 # bubblewrap
 
-A simple tool to get heavily signatured offensive security tools past antivirus.
+A simple tool to get heavily signatured offensive security tools past antivirus solutions.
 
 ## What does it do?
 
@@ -31,7 +31,7 @@ make bubblewrap
 
 ## Why?
 
-I asked myself, what is the minimum amount of change necessary to run an official release of `mimikatz` on a fully up-to-date Windows 10 Enterprise system running Windows Defender in late 2021? As it turns out, not much change is necessary.
+I asked myself, what is the minimum amount of change necessary to run an official release of `mimikatz` on a fully up-to-date Windows 10 Enterprise system running Windows Defender in late 2021? As it turns out, not much change is necessary, and I wanted to make the process easy to apply to other tools.
 
 `mimikatz.exe => donut => dropper.exe` resulted in Defender eating the binary. So did `mimikatz.exe => upx => mimikatz_packed.exe`. The combination of these approaches resulted in `mimikatz` not being detected on disk nor when it was dumping logon passwords.
 
@@ -40,3 +40,5 @@ I asked myself, what is the minimum amount of change necessary to run an officia
 - Provide more configuration options
   - Support for 32-bit binaries
 - Handle multiple executables
+- Figure out .NET EXE issues
+  - e.g. winpeas not running
