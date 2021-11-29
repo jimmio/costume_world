@@ -2,36 +2,35 @@
 
 A simple tool to get heavily signatured offensive security tools past antivirus.
 
-With a given executable:
+## What does it do?
 
-1. Generates shellcode from the executable with `donut`
-1. Inserts the shellcode into a basic c++ dropper and dynamically updates the length of the byte array
-1. Compiles the c++ dropper
-1. Packs the resulting executable with `upx`
-
-As of 2021-11, `bubblewrap` provides safe shipping for off-the-shelf `mimikatz` past an up-to-date Windows Defender.
+1. Generates shellcode from an executable using `donut`
+1. Inserts the shellcode into a basic c++ dropper and updates the length of the byte array accordingly
+1. Compiles the c++ dropper with `gcc`
+1. Packs the resulting executable with `upx` (using the `--ultra-brute` option)
 
 ## Requirements
 
-- docker
-- make
+- `bash` or similar (probably)
+- `docker`
+- `make`
 
 ## Setup
 
 ```
+# build the docker container
 make build
 ```
 
 ## Usage
 
 ```
-make bubblewrap <executable_name>
+cp /path/to/tool.exe /path/to/bubblewrap/input/
+make bubblewrap
 ```
 
 ## TODO
 
-- Put the output in a sub-directory
-- Prevent clobbering and conflicts with existing output
-  - e.g. `upx` is unhappy if `dropper_packed.exe` already exists
 - Provide more configuration options
   - Support for 32-bit binaries
+- Handle multiple executables
