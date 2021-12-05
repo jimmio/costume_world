@@ -33,8 +33,6 @@ make bubblewrap
 
 I asked myself, what is the minimum amount of change necessary to run an official release of `mimikatz` on a fully up-to-date Windows 10 Enterprise system running Windows Defender in late 2021? As it turns out, not much change is necessary, and I wanted to make the process easy to apply to other tools.
 
-`mimikatz.exe => donut => dropper.exe` resulted in Defender eating the binary. So did `mimikatz.exe => upx => mimikatz_packed.exe`. The combination of these approaches resulted in `mimikatz` not being detected on disk nor when it was dumping logon passwords.
-
 ## TODO
 
 - Provide more configuration options
