@@ -1,13 +1,33 @@
-# bubblewrap
+# costume_world
 
-A simple tool to get heavily signatured offensive security tools past antivirus solutions.
+A simple container for PE compression, encryption, and packing, using [`donut`](https://github.com/thewover/donut) and [`upx`](https://github.com/upx/upx).
 
 ## What does it do?
 
+It accepts one x86\_64 PE and returns two:
+
+1. The first contains the provided PE in a compressed and encrypted form.
+1. The second is the first, only run through a packer.
+
+## What does it, like, really do?
+
 1. Generates shellcode from an executable using `donut`
-1. Inserts the shellcode into a basic c++ dropper and updates the length of the byte array accordingly
-1. Compiles the c++ dropper with `gcc`
-1. Packs the resulting executable with `upx` (using the `--ultra-brute` option)
+1. Inserts the shellcode into a basic C++ implant and updates the length of the byte array accordingly
+1. Compiles the C++ dropper with `gcc`
+1. Packs the resulting executable with `upx`
+
+## Why bother?
+
+I was trying to find some minimal, simple modifications to get an official `mimikatz` release past Defender. Then I got tired of manually running the commands and forgetting to update the payload length for `VirtualAlloc`.
+
+## Does it bypass AV?
+
+It depends. Observed during testing in late 2021:
+
+- Regular Defender did not detect or block `mimikatz` as a `donut` module, but did detect and block even a benign `upx`-packed PE ("Trojan:Win32/Wacatac.B!ml").
+- Defender for Endpoint detected and blocked the use of `donut` for being `donut` ("VirTool:Win32/Wovdnut.gen!B"), but it didn't care about `upx` (only what was present once it was unpacked).
+
+Think more "Halloween party" and less "deep cover CIA disguise".
 
 ## Requirements
 
@@ -17,26 +37,17 @@ A simple tool to get heavily signatured offensive security tools past antivirus 
 
 ## Setup
 
+Build the container:
+
 ```
-# build the docker container
 make build
 ```
 
 ## Usage
 
+Place a PE in `/input` and dress it up:
+
 ```
-cp /path/to/tool.exe /path/to/bubblewrap/input/
-make bubblewrap
+cp /path/to/tool.exe /path/to/costume_world/input/
+make costume
 ```
-
-## Why?
-
-I asked myself, what is the minimum amount of change necessary to run an official release of `mimikatz` on a fully up-to-date Windows 10 Enterprise system running Windows Defender in late 2021? As it turns out, not much change is necessary, and I wanted to make the process easy to apply to other tools.
-
-## TODO
-
-- Provide more configuration options
-  - Support for 32-bit binaries
-- Handle multiple executables
-- Figure out .NET EXE issues
-  - e.g. winpeas not running

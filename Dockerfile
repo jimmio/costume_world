@@ -8,6 +8,6 @@ RUN apt update && \
     cd donut && \
     make
 
-WORKDIR /root/bubblewrap
+WORKDIR /root/costume_world
 
-ENTRYPOINT ["/bin/bash", "./bubblewrap.sh"]
+ENTRYPOINT ["/bin/bash", "./costume_world.sh"]

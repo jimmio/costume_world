@@ -1,5 +1,5 @@
 build:
-	@docker build -t bubblewrap .
+	@docker build -t costume_world .
 
-bubblewrap:
-	@docker run --rm -v $$(pwd):/root/bubblewrap bubblewrap
+costume:
+	@docker run --rm -v $$(pwd):/root/costume_world costume_world
