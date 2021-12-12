@@ -1,6 +1,6 @@
 # costume_world
 
-A simple container for PE compression, encryption, and packing, using [`donut`](https://github.com/thewover/donut) and [`upx`](https://github.com/upx/upx).
+A container for toying with AV bypass using [`donut`](https://github.com/thewover/donut) and [`upx`](https://github.com/upx/upx).
 
 ## What does it do?
 
@@ -12,20 +12,20 @@ It accepts one x86\_64 PE and returns two:
 ## What does it, like, really do?
 
 1. Generates shellcode from an executable using `donut`
-1. Inserts the shellcode into a basic C++ implant and updates the length of the byte array accordingly
+1. Inserts the shellcode into a C++ dropper template and updates the length of the byte array accordingly
 1. Compiles the C++ dropper with `gcc`
 1. Packs the resulting executable with `upx`
 
 ## Why bother?
 
-I was trying to find some minimal, simple modifications to get an official `mimikatz` release past Defender. Then I got tired of manually running the commands and forgetting to update the payload length for `VirtualAlloc`.
+I was trying to find some minimal modifications to get an official `mimikatz` release past Defender. Then I got tired of manually running the commands and forgetting to update the payload length for `VirtualAlloc`.
 
 ## Does it bypass AV?
 
 It depends. Observed during testing in late 2021:
 
 - Regular Defender did not detect or block `mimikatz` as a `donut` module, but did detect and block even a benign `upx`-packed PE ("Trojan:Win32/Wacatac.B!ml").
-- Defender for Endpoint detected and blocked the use of `donut` for being `donut` ("VirTool:Win32/Wovdnut.gen!B"), but it didn't care about `upx` (only what was present once it was unpacked).
+- Defender for Endpoint detected and blocked the use of `donut` for being `donut` ("VirTool:Win32/Wovdnut.gen!B"), but it didn't care about `upx` so much as what was present once the PE was unpacked.
 
 Think more "Halloween party" and less "deep cover CIA disguise".
 
